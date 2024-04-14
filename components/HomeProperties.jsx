@@ -1,24 +1,10 @@
 import React from "react";
 import PropertyCard from "./PropertyCard";
 import Link from "next/link";
-
-const fetchData = async () => {
-	try {
-		const response = await fetch(
-			`${process.env.NEXT_PUBLIC_API_DOMAIN}/properties`
-		);
-		if (!response.ok) {
-			throw new Error("Erro ao carregar os dados");
-		}
-
-		return response.json();
-	} catch (error) {
-		console.error("Erro:", error);
-	}
-};
+import { fetchProperties } from "@/utils/request";
 
 const HomeProperties = async () => {
-	const properties = await fetchData();
+	const properties = await fetchProperties();
 
 	const recentProperties = properties
 		.sort(() => Math.random() - Math.random())
